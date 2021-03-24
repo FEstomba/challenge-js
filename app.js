@@ -39,8 +39,22 @@ app.get('/balance', (req,res) => {
 
 })});
 
-app.get('/lastOperations', (req,res) => {
-    res.send('Ultimas 10 operaciones registradas:')
+app.get('/operations', (req,res) => {
+    const {limit, type} = req.query   
+    let sql = `SELECT * FROM operations`;
+
+    if(type!== undefined){
+        sql=sql+` WHERE type = '${type}'`
+    }
+    if(limit!== undefined){
+        sql=sql+` LIMIT ${limit}`
+    }
+    connection.query(sql,( error, results) =>{
+        if (error) throw error;
+
+            res.json(results)
+        
+    });
 });
 
 app.post('/new', (req,res) =>{
@@ -66,9 +80,7 @@ app.delete('/delete', (req,res) => {
     res.send('Eliminar operacion')
 });
 
-app.get('/operation-by-type', (req,res) => {
-    res.send('Egreso o Ingreso')
-})
+
 
 //Crea una conexion con la base de datos 
 connection.connect(error =>{
