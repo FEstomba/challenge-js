@@ -16,16 +16,27 @@ const connection = mysql.createConnection({
     port: '3306'
 });
 
-app.get('/', (req,res) => {
+app.get('/balance', (req,res) => {
     res.send('Balance actual es: $20000')
 });
 
-app.get('/', (req,res) => {
+app.get('/lastOperations', (req,res) => {
     res.send('Ultimas 10 operaciones registradas:')
 });
 
-app.post('/add', (req,res) =>{
-    res.send('Nueva operacion')
+app.post('/new', (req,res) =>{
+    const sql = 'INSERT INTO OPERATIONS SET ?';
+        const operationObj = {
+            date: req.body.date,
+            concept: req.body.concept,
+            amount: req.body.amount,
+            type: req.body.type
+        };
+    
+        connection.query(sql, operationObj, error => {
+            if (error) throw error;
+            res.send('New operation created');
+        })
 });
 
 app.put('/update', (req,res) => {
@@ -40,4 +51,11 @@ app.get('/operation-by-type', (req,res) => {
     res.send('Egreso o Ingreso')
 })
 
+//Crea una conexion con la base de datos 
+connection.connect(error =>{
+    if (error) throw error;
+    console.log('database server running!')
+});
 
+//Inicio el servidor en el puerto configurado
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
