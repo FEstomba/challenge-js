@@ -17,15 +17,34 @@ const connection = mysql.createConnection({
 });
 
 app.get('/balance', (req,res) => {
-    res.send('Balance actual es: $20000')
-});
+    const sql ='SELECT * FROM operations';
+
+    connection.query(sql,( error, operations) =>{
+        if (error) throw error;
+        let balance=0
+        for ( let operation of operations){
+            operationObj= JSON.parse(JSON.stringify(operation))
+            console.log(operationObj)
+            switch(operationObj.type){
+                case 'ingress': 
+                balance = balance + operationObj.amount
+                break;
+                case 'egress': 
+                balance = balance - operationObj.amount
+                break;
+
+            }
+        }
+        res.json(balance)
+
+})});
 
 app.get('/lastOperations', (req,res) => {
     res.send('Ultimas 10 operaciones registradas:')
 });
 
 app.post('/new', (req,res) =>{
-    const sql = 'INSERT INTO OPERATIONS SET ?';
+    const sql = 'INSERT INTO operations SET ?';
         const operationObj = {
             date: req.body.date,
             concept: req.body.concept,
