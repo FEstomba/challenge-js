@@ -57,7 +57,7 @@ app.get('/operations', (req,res) => {
     });
 });
 
-app.post('/new', (req,res) =>{
+app.post('/operation', (req,res) =>{
     const sql = 'INSERT INTO operations SET ?';
         const operationObj = {
             date: req.body.date,
@@ -72,13 +72,18 @@ app.post('/new', (req,res) =>{
         })
 });
 
-app.put('/update', (req,res) => {
+app.put('/operation', (req,res) => {
     res.send('Actualizar operacion')
 });
 
-app.delete('/delete', (req,res) => {
-    res.send('Eliminar operacion')
-});
+app.delete('/operation/:id', (req,res) => {
+    const {id} = req.params;
+    const sql = `DELETE FROM operations WHERE id = ${id}`;
+    
+        connection.query(sql, error => {
+            if (error) throw error;
+            res.send('Operation deleted')
+})});
 
 
 
