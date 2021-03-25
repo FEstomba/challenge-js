@@ -73,7 +73,19 @@ app.post('/operation', (req,res) =>{
 });
 
 app.put('/operation', (req,res) => {
-    res.send('Actualizar operacion')
+    const sql = `UPDATE operations SET ? WHERE id = ${req.body.id}`
+        const operationObj= {
+            date: req.body.date,
+            concept: req.body.concept,
+            amount: req.body.amount,
+        };
+    
+        connection.query(sql, operationObj, error => {
+            if (error) throw error;
+            res.send('Operation updated');
+        })
+
+
 });
 
 app.delete('/operation/:id', (req,res) => {
