@@ -1,0 +1,138 @@
+{
+	"info": {
+		"_postman_id": "0db5d5c2-81b2-4391-a4b1-0f0b3035887e",
+		"name": "Alkemy",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "new",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"date\": \"2021-03-15\",\n    \"concept\": \"Alquiler\",\n    \"amount\": 1000,\n    \"type\": \"egress\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/operation",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"operation"
+					]
+				},
+				"description": "Create a new operation"
+			},
+			"response": []
+		},
+		{
+			"name": "balance",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8000/balance",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"balance"
+					]
+				},
+				"description": "Get balance"
+			},
+			"response": []
+		},
+		{
+			"name": "operations",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8000/operations?type=ingress&limit=10",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"operations"
+					],
+					"query": [
+						{
+							"key": "type",
+							"value": "ingress"
+						},
+						{
+							"key": "limit",
+							"value": "10"
+						}
+					]
+				},
+				"description": "returns operations"
+			},
+			"response": []
+		},
+		{
+			"name": "operation",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8000/operation/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"operation",
+						"1"
+					]
+				},
+				"description": "delete operation"
+			},
+			"response": []
+		},
+		{
+			"name": "operation",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\":2,\n    \"date\": \"2021-03-01\",\n    \"concept\": \"Venta\",\n    \"amount\": 1\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/operation",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"operation"
+					]
+				},
+				"description": "put operation"
+			},
+			"response": []
+		}
+	]
+}
