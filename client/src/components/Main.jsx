@@ -19,7 +19,9 @@ const Main = () => {
     const newOperation = () => {
 
     }
+    const listOperationByType = () => {
 
+    }
 
     let balance = 0
     return (
@@ -29,6 +31,14 @@ const Main = () => {
             >
                 Nueva operacion
             </button>
+
+
+            <button className='btn btn-success float-right'
+            onClick={() => {listOperationByType()}}
+            >
+                Listado de Operaciones
+            </button>
+
             <h1>Balance actual: $ {balance}</h1>
             <h2>Ultimas 10 operaciones:</h2>
             <ul className="list-group">
