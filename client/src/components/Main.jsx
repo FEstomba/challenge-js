@@ -1,6 +1,8 @@
 import React from 'react'
+import { useHistory } from 'react-router-dom'
 
 const Main = () => {
+    const history=useHistory();
 
     let listOperations = [{
         date:"8/5",
@@ -27,14 +29,14 @@ const Main = () => {
     return (
         <div>
             <button className='btn btn-primary float-right'
-            onClick={() => {newOperation()}}
+            onClick={() => {history.push("/nueva-operacion")}}
             >
                 Nueva operacion
             </button>
 
 
             <button className='btn btn-success float-right'
-            onClick={() => {listOperationByType()}}
+            onClick={() => {history.push("/listado-operaciones")}}
             >
                 Listado de Operaciones
             </button>
