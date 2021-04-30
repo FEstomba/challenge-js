@@ -40,8 +40,9 @@ const Main = () => {
             >
                 Listado de Operaciones
             </button>
-
+            <div style={{color:'red'}}>
             <h1>Balance actual: $ {balance}</h1>
+            </div>
             <h2>Ultimas 10 operaciones:</h2>
             <ul className="list-group">
                         {
