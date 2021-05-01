@@ -7,27 +7,32 @@ import {
   Switch,
   Route,
 } from 'react-router-dom'
+import EditOperation from './components/EditOperation';
 
 
 function App() {
   return (
-      <Router>
+    <Router>
 
-        <Switch>
-          <Route path="/listado-operaciones">
-          <ListOperations/>
+      <Switch>
+        <Route path="/editar-operacion">
+          <EditOperation />
           </Route>
 
-          <Route path="/nueva-operacion">
-          <NewOperation/>
-          </Route>
-  
-          <Route exact path="/">
-          <Main/>
-          </Route>
-        </Switch>
-      </Router>
-    );
+        <Route path="/listado-operaciones">
+          <ListOperations />
+        </Route>
+
+        <Route path="/nueva-operacion">
+          <NewOperation />
+        </Route>
+
+        <Route exact path="/">
+          <Main />
+        </Route>
+      </Switch>
+    </Router>
+  );
 
 
 }

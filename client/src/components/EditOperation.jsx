@@ -3,39 +3,36 @@ import { withRouter } from 'react-router-dom';
 import axios from 'axios'
 
 
-class NewOperation extends React.Component {
-
+class EditOperation extends React.Component {
     constructor(args) {
         super(args)
-        this.state = {
-            date: '',
-            concept: '',
-            amount: '',
-            type: '',
-        }
+        this.state = this.props.history.location.state
 
     }
-    async newOperation() {
+
+
+
+     editOperation = async (id) => {
+        console.log("ID:" + id)
         try {
             const response = await axios({
-                url: 'http://localhost:8000/operation',
-                method: 'POST',
-                data: this.state
-
+                url: "http://localhost:8000/operation/" + id,
+                method: 'PUT',
+                data:this.state,
             })
 
-            alert("Se guardó correctamente")
+            alert("Se editó correctamente")
         } catch (e) {
             alert(e);
-        }
 
     }
-
+}
 
     onChange(e) {
         this.setState({
             [e.target.name]: e.target.value
         })
+
     }
 
 
@@ -49,7 +46,8 @@ class NewOperation extends React.Component {
                     <input
                         value={this.state.date}
                         onChange={this.onChange.bind(this)}
-                        name="date" id="date" type="date" />
+                        name="date" id="date" type="date"
+                        defaultValue={this.state.date} />
                 </div>
 
                 <div>
@@ -69,19 +67,10 @@ class NewOperation extends React.Component {
                 </div>
 
                 <div>
-                    <label htmlFor='type'>Tipo de Operacion</label>
-                </div>
 
-                <div>
-                    <input type="radio" name="type" value="ingress" onChange={this.onChange.bind(this)} /> Ingreso
-                <input type="radio" name="type" value="egress" onChange={this.onChange.bind(this)} /> Egreso
-                </div>
+                    <button type="button" class="btn btn-success" onClick={() => this.editOperation(this.state.id)}>Guardar</button>
 
-                <div>
-
-                    <button type="button" class="btn btn-success" onClick={() => this.newOperation()}>Guardar</button>
-
-                    <button onClick={() => { this.props.history.push("/") }} type="button" class="btn btn-danger">Cancelar</button>
+                    <button onClick={() => { this.props.history.push("/listado-operaciones") }} type="button" class="btn btn-danger">Cancelar</button>
                 </div>
 
             </div>
@@ -90,4 +79,4 @@ class NewOperation extends React.Component {
     }
 
 }
-export default withRouter(NewOperation);
+export default withRouter(EditOperation);
