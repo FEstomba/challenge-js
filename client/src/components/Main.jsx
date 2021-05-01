@@ -27,7 +27,7 @@ const Main = () => {
 
     let balance = 0
     return (
-        <div>
+        <div className='Menu'>
             <button className='btn btn-primary float-right'
             onClick={() => {history.push("/nueva-operacion")}}
             >
@@ -40,10 +40,10 @@ const Main = () => {
             >
                 Listado de Operaciones
             </button>
-            <div style={{color:'red'}}>
-            <h1>Balance actual: $ {balance}</h1>
-            </div>
-            <h2>Ultimas 10 operaciones:</h2>
+
+            <h2>Balance actual: $ {balance}</h2>
+        
+            <h3>Ultimas 10 operaciones:</h3>
             <ul className="list-group">
                         {
                             listOperations.map(item =>

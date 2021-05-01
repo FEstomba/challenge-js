@@ -1,31 +1,45 @@
 import React from 'react'
+import { withRouter } from 'react-router-dom';
+import axios from 'axios'
 
 
-class NewOperation extends React.Component {
-
+class NewOperation extends React.Component  {
+    
     constructor(args){
         super(args)
         this.state = { 
             date: '',
             concept: '',
-            message: ''
-
+            amount: '',
+            type:'',
         }
 
     }
+
+
+    async newOperation() {
+        try{
+            const response = await axios({
+                url: 'http://localhost:8000/operation',
+                method: 'POST',
+                data: this.state
+            })
+            alert("Se guardo correctamente")
+        }catch(e){
+            alert(e);
+        }
+        
+    }
+
     onChange(e){
         this.setState({
             [e.target.name]: e.target.value
         })
     }
 
-    save(e){
-        this.setState({
-            message: 'Guardado correctamente'
-        })
-    }
 
     render(){
+        
         return (
             <div className='Form' 
             style={{background: '#bdc3c7',fontSize:'20px',color:'#000', margin:'25px 25px', padding:'25px',textAlign:'center'}}>
@@ -55,14 +69,18 @@ class NewOperation extends React.Component {
 
                 <div>
                 <label htmlFor='type'>Tipo de Operacion</label>
+                </div>
+
+                <div>
                 <input type="radio" name="type" value="ingress" onChange={this.onChange.bind(this)}/> Ingreso
                 <input type="radio" name="type" value="egress" onChange={this.onChange.bind(this)}/> Egreso
                 </div>
 
                 <div>
-                    <button type="button" class="btn btn-success" onClick={this.onChange.bind(this)}>Guardar</button>
-
-                    <button type="button" class="btn btn-danger" onClick={this.onChange.bind(this)}>Cancelar</button>
+                    
+                    <button type="button" class="btn btn-success" onClick={() => this.newOperation()}>Guardar</button>
+        
+                    <button onClick={() => { this.props.history.push("/")}}type="button" class="btn btn-danger">Cancelar</button>
                 </div>
 
             </div>
@@ -71,4 +89,4 @@ class NewOperation extends React.Component {
     }
     
 }
-export default NewOperation
+export default withRouter(NewOperation);
