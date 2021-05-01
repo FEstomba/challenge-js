@@ -4,20 +4,27 @@ import { useHistory } from 'react-router-dom'
 
 const Main = () => {
     const [operations, setOperations] = useState([])
+    const [balance, setBalance] = useState([])
     const history=useHistory();
 
     useEffect(()=>{
-        async function fetchData(){
+        async function fetchBalance(){
+            const response= await axios.get("http://localhost:8000/balance")
+            setBalance(response.data)
+        }
+        
+        async function fetchOperations(){
             const response= await axios.get("http://localhost:8000/operations?limit=10&order=desc")
             setOperations(response.data)
         }
-        fetchData()
+        
+        fetchBalance()
+        fetchOperations()
     }
     ,[])
 
     console.log(operations)
     
-    let balance = 0
     return (
         <div className='Menu'>
             <button className='btn btn-primary float-right'
@@ -46,7 +53,7 @@ const Main = () => {
                                     Tipo: {item.type}
 
 
-                                    </li>
+                               </li>
                                 )
                         }
                     </ul> 
