@@ -1,6 +1,9 @@
 import React, {useState,useEffect} from 'react'
 import { Container, Row, Col } from 'reactstrap';
 import axios from 'axios'
+import { FaTrashAlt } from 'react-icons/fa';
+import { FaWrench } from 'react-icons/fa';
+
 
 const ListOperations = () => {
     const [ingress, setIngress] = useState([])
@@ -21,6 +24,19 @@ const ListOperations = () => {
         fetchEgress()
 }
 ,[])
+        const displayOperation = (item)=> {
+           return (
+           <li key ="{item.id}" className="list-group-item" >
+            <FaTrashAlt/>
+            <FaWrench/>
+            Fecha: {item.date},
+            Concepto: {item.concept},
+            $: {item.amount},
+            Tipo: {item.type}
+            
+       </li>)
+
+        }
         return (
             <div className='columns'
             style={{background: '#bdc3c7',fontSize:'20px',color:'#000'}}>
@@ -30,12 +46,7 @@ const ListOperations = () => {
             <ul className="list-group">
                         {
                             ingress.map(item =>
-                                <li key ="{item.id}" className="list-group-item">
-                                    Fecha: {item.date},
-                                    Concepto: {item.concept},
-                                    $: {item.amount},
-                                    Tipo: {item.type}
-                               </li>
+                              displayOperation(item)
                                 )
                         }
                     </ul> 
@@ -45,12 +56,7 @@ const ListOperations = () => {
             <ul className="list-group">
                         {
                             egress.map(item =>
-                                <li key ="{item.id}" className="list-group-item">
-                                    Fecha: {item.date},
-                                    Concepto: {item.concept},
-                                    $: {item.amount},
-                                    Tipo: {item.type}
-                               </li>
+                                displayOperation(item)
                                 )
                         }
                     </ul> 
