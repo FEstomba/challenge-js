@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, {useState,useEffect} from 'react'
 import { useHistory } from 'react-router-dom'
 
+
 const Main = () => {
     const [operations, setOperations] = useState([])
     const [balance, setBalance] = useState([])
@@ -23,10 +24,14 @@ const Main = () => {
     }
     ,[])
 
+    
+
     console.log(operations)
     
     return (
-        <div className='Menu'>
+        <div className='Menu'
+        style={{background:'#8f94fb',fontSize:'20px',color:'#000', padding:'25px'}}>
+            
             <button className='btn btn-primary float-right'
             onClick={() => {history.push("/nueva-operacion")}}
             >
@@ -39,10 +44,12 @@ const Main = () => {
             >
                 Listado de Operaciones
             </button>
-
+            <div className='balance'
+            style={{background:'#4e54c8',textAlign:'center', padding:'15px'}}>
             <h2>Balance actual: $ {balance}</h2>
         
             <h3>Ultimas 10 operaciones:</h3>
+              </div>
             <ul className="list-group">
                         {
                             operations.map(item =>

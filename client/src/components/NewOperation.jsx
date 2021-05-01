@@ -15,15 +15,15 @@ class NewOperation extends React.Component  {
         }
 
     }
-
-
     async newOperation() {
         try{
             const response = await axios({
                 url: 'http://localhost:8000/operation',
                 method: 'POST',
                 data: this.state
+
             })
+            
             alert("Se guardo correctamente")
         }catch(e){
             alert(e);
@@ -43,7 +43,7 @@ class NewOperation extends React.Component  {
         
         return (
             <div className='Form' 
-            style={{background: '#bdc3c7',fontSize:'20px',color:'#000', margin:'25px 25px', padding:'25px',textAlign:'center'}}>
+            style={{background: '#8f94fb',fontSize:'20px',color:'#000', margin:'25px 25px', padding:'25px',textAlign:'center'}}>
                 <div>
                 <label htmlFor="date"> Fecha </label>
                 <input 
