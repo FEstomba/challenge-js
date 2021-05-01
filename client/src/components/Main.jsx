@@ -1,30 +1,22 @@
-import React from 'react'
+import axios from 'axios';
+import React, {useState,useEffect} from 'react'
 import { useHistory } from 'react-router-dom'
 
 const Main = () => {
+    const [operations, setOperations] = useState([])
     const history=useHistory();
 
-    let listOperations = [{
-        date:"8/5",
-        concept:"a",
-        amount:8,
-        type: "ingress"
-
-    },
-    {
-        date:"7/5",
-        concept:"b",
-        amount:10,
-        type: "egress"
-
-    }]
-    const newOperation = () => {
-
+    useEffect(()=>{
+        async function fetchData(){
+            const response= await axios.get("http://localhost:8000/operations?limit=10&order=desc")
+            setOperations(response.data)
+        }
+        fetchData()
     }
-    const listOperationByType = () => {
+    ,[])
 
-    }
-
+    console.log(operations)
+    
     let balance = 0
     return (
         <div className='Menu'>
@@ -46,7 +38,7 @@ const Main = () => {
             <h3>Ultimas 10 operaciones:</h3>
             <ul className="list-group">
                         {
-                            listOperations.map(item =>
+                            operations.map(item =>
                                 <li key ="{item.id}" className="list-group-item">
                                     Fecha: {item.date},
                                     Concepto: {item.concept},

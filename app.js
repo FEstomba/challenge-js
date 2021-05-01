@@ -42,17 +42,21 @@ app.get('/balance', (req,res) => {
         res.json(balance)
 
 })});
-
+// /operations?limit=10&type=ingress&order=desc
 app.get('/operations', (req,res) => {
-    const {limit, type} = req.query   
+    const {limit, type,order } = req.query   
     let sql = `SELECT * FROM operations`;
 
     if(type!== undefined){
         sql=sql+` WHERE type = '${type}'`
     }
+    if(order!==undefined){
+        sql=sql+` ORDER BY date ${order}`
+    }
     if(limit!== undefined){
         sql=sql+` LIMIT ${limit}`
     }
+
     connection.query(sql,( error, results) =>{
         if (error) throw error;
 
