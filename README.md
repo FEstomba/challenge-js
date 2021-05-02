@@ -1,4 +1,23 @@
 # challenge-js
-En Node.js, debe reiniciar el proceso para que los cambios surtan efecto. Eso añade un otro paso a su flujo de trabajo para que los cambios surtan efecto. Puede eliminar este paso adicional usando nodemon para reiniciar el proceso automáticamente.
 
-nodemon es una utilidad de interfaz de línea de comandos (CLI) desarrollada por @rem que envuelve su aplicación Node, vigila el sistema de archivos y reinicia automáticamente el proceso
+##  Base de datos
+
+Ejecutar el script "scripts.sql" para iniciar el esquema y las tablas.
+
+## Servidor
+
+En el directorio raiz del proyecto se encuentra el archivo app.js que contiene todo el codigo referido a la aplicacion node. En este archivo tambien se encuentra la configuracion para la conexion con la base de datos.
+
+Para poner en funcionamiento el servidor ejecutar:
+```
+yarn start
+```
+
+## Frontend
+
+En el directorio "client" se encuentra  todos los archivos necesarios para ejecutar el frontend.
+
+Para poner en funcionamiento el frontend ejecutar:
+```
+yarn start
+```
